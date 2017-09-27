@@ -1,0 +1,17 @@
+<%= render 'flash' %>
+<h1><%= @restaurant.name %> </h1>
+
+<p> <%= @restaurant.address %>
+  <%= @restaurant.city %>
+  <%= @restaurant.state %>
+  <%= @restaurant.zip %>
+  <%= @restaurant.description %> </p>
+<p>
+  <% @reviews.each do |review| %>
+    <li><%= review.rating %>
+      <br> <strong><%= review.body %></strong>
+      <br><%= review.created_at.try(:strftime, "%B %d %Y") %> </li>
+  <% end %>
+</p>
+
+<h4><%= link_to 'Add a Review', new_restaurant_review_path(@restaurant)  %></h4>

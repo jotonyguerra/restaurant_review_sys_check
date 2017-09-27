@@ -1,0 +1,23 @@
+<% if flash[:notice] %>
+  <p><%= flash[:notice] %></p>
+<% end %>
+<% if flash[:success] %>
+  <p><%= flash[:success] %></p>
+<% end %>
+<% if flash[:errors] %>
+  <p><%= flash[:errors] %></p>
+<% end %>
+
+<h4>Review Form for <%= @restaurant.name %></h4>
+
+<%= form_for([@restaurant, @review]) do |f| %>
+  <%= f.label :rating %>
+  <%= f.text_field :rating%>
+
+  <%= f.label :body %>
+  <%= f.text_area :body %>
+
+  <%= f.hidden_field :restaurant_id, value: @restaurant.id %>
+
+  <%= f.submit 'Add Review'%>
+<% end %>

@@ -1,0 +1,17 @@
+<h1> Restaurant </h1>
+<% if flash[:notice] %>
+  <p><%= flash[:notice] %></p>
+<% end %>
+<% if flash[:success] %>
+  <p><%= flash[:success] %></p>
+<% end %>
+<% if flash[:errors] %>
+  <p><%= flash[:errors] %></p>
+<% end %>
+
+<ul>
+<% @restaurants.each do |restaurant| %>
+    <li><%=link_to restaurant.name, restaurant %></li>
+<%end%>
+</ul>
+<%= link_to "Add New Restaurant", new_restaurant_path %>
