@@ -14,11 +14,18 @@ class ReviewsController < ApplicationController
     @restaurant = Restaurant.find(review_params[:restaurant_id])
     @review = @restaurant.reviews.build(review_params)
     if @review.save
-      flash[:notice] = "Review added successfully"
+      flash[:success] = "Review added successfully"
       redirect_to restaurant_path(@restaurant)
     else
-      flash[:notice] = "Body can't be blank"
-      flash[:notice] += " Rating can't be blank"
+      if !valid_body? && !valid_rating?
+        flash[:errors] = "Body can't be blank"
+        flash[:errors] << " Rating can't be blank"
+        binding.pry
+      elsif !valid_rating?
+        flash[:errors] = "Rating can't be blank"
+      elsif !valid_body?
+        flash[:errors] = "Body can't be blank"
+      end
       render 'restaurants/reviews/new'
     end
   end
